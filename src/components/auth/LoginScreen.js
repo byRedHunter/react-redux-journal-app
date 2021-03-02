@@ -1,7 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { login, startGoogleLogin } from '../../actions/auth'
+import {
+	login,
+	startGoogleLogin,
+	startLoginEmailPassword,
+} from '../../actions/auth'
 import { useForm } from '../../hooks/useForm'
 
 export const LoginScreen = () => {
@@ -9,13 +13,13 @@ export const LoginScreen = () => {
 
 	const [values, handleInputChange] = useForm({
 		email: 'redhunter@gmail.com',
-		password: '123456',
+		password: 'redhunter',
 	})
 	const { email, password } = values
 
 	const handleLogin = (e) => {
 		e.preventDefault()
-		dispatch(login('12sd5', 'Jhonny Quispe'))
+		dispatch(startLoginEmailPassword(email, password))
 	}
 
 	const handleLoginGoogle = () => {
