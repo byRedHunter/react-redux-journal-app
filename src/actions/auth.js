@@ -15,7 +15,6 @@ export const startLoginEmailPassword = (email, password) => {
 				dispatch(finishLoading())
 			})
 			.catch((e) => {
-				console.log(e)
 				dispatch(finishLoading())
 				dispatch(setError(e.message))
 			})
@@ -29,7 +28,6 @@ export const startRegister = (email, password, name) => {
 			.createUserWithEmailAndPassword(email, password)
 			.then(async ({ user }) => {
 				await user.updateProfile({ displayName: name })
-				console.log(user)
 
 				dispatch(login(user.uid, user.displayName))
 			})
