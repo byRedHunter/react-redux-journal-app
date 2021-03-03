@@ -10,6 +10,8 @@ import { login } from '../actions/auth'
 import { LoadingScreen } from '../components/commons/LoadingScreen'
 import { PublicRouter } from './PublicRouter'
 import { PrivateRouter } from './PrivateRouter'
+import { loadNotes } from '../helpers/loadNotes'
+import { setNotes } from '../actions/notes'
 
 export const AppRouter = () => {
 	const dispatch = useDispatch()
@@ -17,10 +19,13 @@ export const AppRouter = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 
 	useEffect(() => {
-		firebase.auth().onAuthStateChanged((user) => {
+		firebase.auth().onAuthStateChanged(async (user) => {
 			if (user?.uid) {
 				dispatch(login(user.uid, user.displayName))
 				setIsLoggedIn(true)
+
+				const notes = await loadNotes(user.uid)
+				dispatch(setNotes(notes))
 			} else {
 				setIsLoggedIn(false)
 			}
