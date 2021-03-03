@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import { firebase } from '../firebase/firebase-config'
 
@@ -10,8 +10,7 @@ import { login } from '../actions/auth'
 import { LoadingScreen } from '../components/commons/LoadingScreen'
 import { PublicRouter } from './PublicRouter'
 import { PrivateRouter } from './PrivateRouter'
-import { loadNotes } from '../helpers/loadNotes'
-import { setNotes } from '../actions/notes'
+import { startLoadingNotes } from '../actions/notes'
 
 export const AppRouter = () => {
 	const dispatch = useDispatch()
@@ -24,8 +23,7 @@ export const AppRouter = () => {
 				dispatch(login(user.uid, user.displayName))
 				setIsLoggedIn(true)
 
-				const notes = await loadNotes(user.uid)
-				dispatch(setNotes(notes))
+				dispatch(startLoadingNotes(user.uid))
 			} else {
 				setIsLoggedIn(false)
 			}

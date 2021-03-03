@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const JournalEntry = () => {
+export const JournalEntry = ({ title, body, date }) => {
 	return (
 		<div className='journal__entry'>
 			<div
@@ -13,10 +13,8 @@ export const JournalEntry = () => {
 			></div>
 
 			<div className='journal__entry-body'>
-				<p className='journal__entry-title'>Un nueva clase</p>
-				<p className='journal__entry-content'>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				</p>
+				<p className='journal__entry-title'>{title}</p>
+				<p className='journal__entry-content'>{body}</p>
 			</div>
 
 			<div className='journal__entry-date-box'>
