@@ -1,16 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import moment from 'moment'
+import { useDispatch } from 'react-redux'
+import { activeNote } from '../../actions/notes'
 
-export const JournalEntry = ({ title, body, date }) => {
+export const JournalEntry = ({ id, title, body, date, url }) => {
+	const dispatch = useDispatch()
+	const noteDate = moment(date)
+
+	const hanldeEntryClick = () => {
+		dispatch(activeNote(id, { id, title, body, date, url }))
+	}
+
 	return (
-		<div className='journal__entry'>
-			<div
-				className='journal__entry-picture'
-				style={{
-					backgroundSize: 'cover',
-					backgroundImage:
-						'url(https://images.unsplash.com/photo-1527960669566-f882ba85a4c6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YXdlc29tZSUyMHBpY3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80)',
-				}}
-			></div>
+		<div className='journal__entry' onClick={hanldeEntryClick}>
+			{url && (
+				<div
+					className='journal__entry-picture'
+					style={{
+						backgroundSize: 'cover',
+						backgroundImage: `url(${url})`,
+					}}
+				></div>
+			)}
 
 			<div className='journal__entry-body'>
 				<p className='journal__entry-title'>{title}</p>
@@ -18,9 +30,17 @@ export const JournalEntry = ({ title, body, date }) => {
 			</div>
 
 			<div className='journal__entry-date-box'>
-				<span>Monday</span>
-				<h4>25</h4>
+				<span>{noteDate.format('dddd')}</span>
+				<h4>{noteDate.format('Do')}</h4>
 			</div>
 		</div>
 	)
+}
+
+JournalEntry.propTypes = {
+	id: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+	body: PropTypes.string.isRequired,
+	date: PropTypes.number.isRequired,
+	url: PropTypes.string.isRequired,
 }

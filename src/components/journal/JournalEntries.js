@@ -10,9 +10,11 @@ export const JournalEntries = () => {
 			{notes.map((note) => (
 				<JournalEntry
 					key={note.id}
+					id={note.id}
 					title={note.title}
 					body={note.body}
 					date={note.date}
+					url={''}
 				/>
 			))}
 		</div>
