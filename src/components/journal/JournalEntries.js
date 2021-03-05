@@ -14,7 +14,7 @@ export const JournalEntries = () => {
 					title={note.title}
 					body={note.body}
 					date={note.date}
-					url={''}
+					url={note.url ? note.url : ''}
 				/>
 			))}
 		</div>

@@ -9,7 +9,7 @@ export const NoteScreen = () => {
 
 	const { active: note } = useSelector((state) => state.notes)
 	const [values, handleInputChange, reset] = useForm(note)
-	const { body, title, url } = values
+	const { body, title } = values
 
 	const activeId = useRef(note.id)
 
@@ -46,12 +46,9 @@ export const NoteScreen = () => {
 					onChange={handleInputChange}
 				></textarea>
 
-				{url && (
+				{note.url && (
 					<div className='notes__image'>
-						<img
-							src='https://cdn.pixabay.com/photo/2012/08/27/14/19/mountains-55067__340.png'
-							alt=''
-						/>
+						<img src={note.url} alt='' />
 					</div>
 				)}
 			</div>
