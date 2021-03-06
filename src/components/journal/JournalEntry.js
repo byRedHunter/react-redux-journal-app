@@ -13,7 +13,10 @@ export const JournalEntry = ({ id, title, body, date, url }) => {
 	}
 
 	return (
-		<div className='journal__entry' onClick={hanldeEntryClick}>
+		<div
+			className='journal__entry animate__animated animate__bounceInLeft'
+			onClick={hanldeEntryClick}
+		>
 			{url && (
 				<div
 					className='journal__entry-picture'
